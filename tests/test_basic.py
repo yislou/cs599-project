@@ -25,7 +25,7 @@ def test_config_loading():
     assert Config.PROJECT_ROOT.exists()
     assert Config.CHUNK_SIZE > 0
     assert Config.CHUNK_OVERLAP > 0
-    print("✅ Config loading passed")
+    print("[PASS]  Config loading passed")
 
 
 def test_document_chunking():
@@ -42,7 +42,7 @@ def test_document_chunking():
     assert len(chunks) > 0
     for chunk in chunks:
         assert "source" in chunk.metadata
-    print(f"✅ Document chunking passed ({len(chunks)} chunks)")
+    print(f"[PASS]  Document chunking passed ({len(chunks)} chunks)")
 
 
 def test_vector_store_operations():
@@ -50,7 +50,7 @@ def test_vector_store_operations():
     from src.config import config
 
     if not config.DEEPSEEK_API_KEY:
-        print("⚠️  Skipping vector store test (no API key)")
+        print("[SKIP]   Skipping vector store test (no API key)")
         return
 
     from src.rag.vector_store import (
@@ -84,24 +84,24 @@ def test_vector_store_operations():
 
     count = add_documents(docs)
     assert count == 3
-    print(f"✅ Added {count} documents to vector store")
+    print(f"[PASS]  Added {count} documents to vector store")
 
     # List documents
     sources = list_indexed_documents()
     assert len(sources) == 2
     assert "ai_intro.txt" in sources
-    print(f"✅ Listed {len(sources)} source documents")
+    print(f"[PASS]  Listed {len(sources)} source documents")
 
     # Search
     results = similarity_search("什么是人工智能", k=2)
     assert len(results) == 2
     assert "score" in results[0].metadata
-    print(f"✅ Similarity search returned {len(results)} results")
+    print(f"[PASS]  Similarity search returned {len(results)} results")
 
     # Cleanup
     clear_store()
     assert get_document_count() == 0
-    print("✅ Vector store cleared successfully")
+    print("[PASS] Vector store cleared successfully")
 
 
 def test_agent_compilation():
@@ -109,14 +109,14 @@ def test_agent_compilation():
     from src.config import config
 
     if not config.DEEPSEEK_API_KEY:
-        print("⚠️  Skipping agent test (no API key)")
+        print("[SKIP]   Skipping agent test (no API key)")
         return
 
     from src.agent.core import create_agent
 
     agent = create_agent()
     assert agent is not None
-    print("✅ Agent graph compiled successfully")
+    print("[PASS]  Agent graph compiled successfully")
 
 
 if __name__ == "__main__":
@@ -137,11 +137,11 @@ if __name__ == "__main__":
 
     for name, test_fn in tests:
         try:
-            print(f"\n▶ {name}")
+            print(f"\n>  {name}")
             test_fn()
             passed += 1
         except Exception as e:
-            print(f"❌ {name} FAILED: {e}")
+            print(f"[FAIL]  {name} FAILED: {e}")
             failed += 1
 
     print(f"\n{'=' * 50}")
