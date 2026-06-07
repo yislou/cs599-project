@@ -1,29 +1,41 @@
 """
-Embedding generator — uses DeepSeek Embedding API to generate vector embeddings.
+Embedding generator — uses local sentence-transformers model for vector embeddings.
 
-DeepSeek's embedding endpoint is OpenAI-compatible, so we use
-the OpenAI embeddings client pointed at the DeepSeek base URL.
+Since DeepSeek does not provide an Embedding API, we use a local model
+(BAAI/bge-small-zh-v1.5) which supports Chinese-English bilingual text.
+No extra API key needed — runs entirely on CPU.
 """
+
+import os
+
+# Set HF mirror and SSL before any huggingface imports
+if "HF_ENDPOINT" not in os.environ:
+    os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
+if "HF_HUB_DISABLE_SSL_VERIFY" not in os.environ:
+    os.environ["HF_HUB_DISABLE_SSL_VERIFY"] = "1"
 
 from typing import List
 
 from langchain_core.embeddings import Embeddings
-from langchain_openai import OpenAIEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 
 from src.config import config
 
 
 def create_embeddings() -> Embeddings:
     """
-    Create an embeddings client using DeepSeek API.
+    Create a local HuggingFace embeddings instance.
+
+    Uses BAAI/bge-small-zh-v1.5 — a lightweight Chinese-English
+    bilingual model (512 dims, ~100MB download).
 
     Returns:
-        OpenAIEmbeddings instance configured for DeepSeek.
+        HuggingFaceEmbeddings instance.
     """
-    return OpenAIEmbeddings(
-        model=config.EMBEDDING_MODEL,
-        api_key=config.DEEPSEEK_API_KEY,
-        base_url=config.DEEPSEEK_BASE_URL,
+    return HuggingFaceEmbeddings(
+        model_name=config.EMBEDDING_MODEL,
+        model_kwargs={"device": "cpu"},
+        encode_kwargs={"normalize_embeddings": True},
     )
 
 

@@ -32,7 +32,9 @@ class Config:
 
     # Model names
     LLM_MODEL: str = os.getenv("LLM_MODEL", "deepseek-chat")
-    EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "text-embedding-3-small")
+    EMBEDDING_MODEL: str = os.getenv(
+        "EMBEDDING_MODEL", "BAAI/bge-small-zh-v1.5"
+    )
 
     # Chunking parameters
     CHUNK_SIZE: int = int(os.getenv("CHUNK_SIZE", "1000"))
