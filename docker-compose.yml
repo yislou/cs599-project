@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    container_name: agentic-rag-assistant
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data          # Persist ChromaDB data
+      - ./.env:/app/.env:ro       # Read-only env
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
