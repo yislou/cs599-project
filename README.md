@@ -4,7 +4,7 @@
 >
 > 基于 DeepSeek + LangGraph + ChromaDB 构建的智能知识库问答系统
 
-[![tag](https://img.shields.io/badge/version-v0.1-blue)](https://github.com/你的用户名/cs599-project/releases/tag/v0.1)
+[![tag](https://img.shields.io/badge/version-v0.1-blue)](https://github.com/yislou/cs599-project/releases/tag/v0.1)
 [![Python](https://img.shields.io/badge/python-3.11+-green.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -55,7 +55,7 @@ Agentic RAG 智能知识库助手是一款基于**检索增强生成 (RAG)** 与
 ### 1. 克隆仓库
 
 ```bash
-git clone https://github.com/你的用户名/cs599-project.git
+git clone https://github.com/yislou/cs599-project.git
 cd cs599-project
 ```
 
