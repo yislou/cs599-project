@@ -4,9 +4,12 @@
 >
 > 基于 DeepSeek + LangGraph + ChromaDB 构建的智能知识库问答系统
 
-[![tag](https://img.shields.io/badge/version-v0.1-blue)](https://github.com/yislou/cs599-project/releases/tag/v0.1)
+[![tag](https://img.shields.io/badge/version-v1.0_final-blue)](https://github.com/yislou/cs599-project/releases)
 [![Python](https://img.shields.io/badge/python-3.11+-green.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![status](https://img.shields.io/badge/submitted-2026.06.22-brightgreen)](https://github.com/yislou/cs599-project)
+
+> 📄 **大作业报告**: [CS599_大作业报告.pdf](docs/CS599_大作业报告.pdf)
 
 ---
 
